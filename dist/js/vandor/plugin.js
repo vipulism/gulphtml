@@ -1,0 +1,9 @@
+"use strict";
+
+function hukoo(ko) {
+  return "koko";
+}
+
+hukoo();
+console.log('helssssslow');
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZhbmRvci9wbHVnaW4uanMiXSwibmFtZXMiOlsiaHVrb28iLCJrbyIsImNvbnNvbGUiLCJsb2ciXSwibWFwcGluZ3MiOiI7O0FBQUEsU0FBU0EsS0FBVCxDQUFlQyxFQUFmLEVBQWtCO0FBQ2xCLFNBQU8sTUFBUDtBQUNDOztBQUNERCxLQUFLO0FBQ0xFLE9BQU8sQ0FBQ0MsR0FBUixDQUFZLGFBQVoiLCJzb3VyY2VzQ29udGVudCI6WyJmdW5jdGlvbiBodWtvbyhrbyl7XHJcbnJldHVybiBcImtva29cIjtcclxufVxyXG5odWtvbygpOyBcclxuY29uc29sZS5sb2coJ2hlbHNzc3NzbG93Jyk7Il0sImZpbGUiOiJ2YW5kb3IvcGx1Z2luLmpzIn0=

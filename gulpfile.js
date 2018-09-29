@@ -1,47 +1,57 @@
 var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
-	sass = require('gulp-ruby-sass'),
+	sass2 = require('gulp-ruby-sass'),
+	sass = require('gulp-sass'),
 	combineMq = require('gulp-combine-mq'),
-	imagemin = require('gulp-imagemin');
-	watch = require('gulp-watch').
-	babel = require('gulp-babel');
-var browserSync = require('browser-sync').create();
+	imagemin = require('gulp-imagemin'),
+    watch = require('gulp-watch'),
+    sourcemaps = require('gulp-sourcemaps'),
+	browserify = require('gulp-browserify'),
+    babel = require('gulp-babel'),
+    browserSync = require('browser-sync').create();
 
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['sass', 'js'], function() {
 
     browserSync.init({
-        server: "./src"
+        server: "./"
     });
+   
 
+    gulp.watch("src/js/**/*.js", ['js']);
     gulp.watch("src/scss/*.scss", ['sass']);
-    gulp.watch("src/*.html").on('change', browserSync.reload);
+    gulp.watch("*.html").on('change', browserSync.reload);
 });
 
-/**
- * Compile with gulp-ruby-sass + source maps
- */
-gulp.task('sass', function () {
 
-    return sass('src/scss', {sourcemap: true})
-        .on('error', function (err) {
-            console.error('Error!', err.message);
-        })
-        .pipe(sourcemaps.write('./', {
+gulp.task('sass', () =>
+    sass2('src/scss/*.scss', {sourcemap: true})
+        .on('error', sass.logError)
+        // for inline sourcemaps
+        // .pipe(sourcemaps.write())
+        // // for file sourcemaps
+        .pipe(sourcemaps.write('maps', {
             includeContent: false,
-            sourceRoot: '/app/scss'
+            sourceRoot: 'source'
         }))
-        .pipe(browserSync.stream({match: '**/*.css'}));
-});
-
-
+        .pipe(gulp.dest('dist/css')) 
+        .pipe(browserSync.stream())
+);
+     
 // process JS files and return the stream.
 gulp.task('js', function () {
-    return gulp.src('src/js/*js')
-        .pipe(browserify())
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'));
+    return gulp.src('src/js/**/*.js')
+        .pipe(sourcemaps.init())
+        // .pipe(browserify({minify: false})) 
+        .pipe(babel({ 
+                presets: ['@babel/env']
+            }))
+        // .pipe(concat('bundle.min.js'))
+        // .pipe(uglify({mangle: {toplevel: true}}))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/js/'));
+        browserSync.reload();
 });
 
 // create a task that ensures the `js` task is complete before
@@ -63,7 +73,7 @@ gulp.task('default', ['js'], function () {
 
     // add browserSync.reload to the tasks array to make
     // all browsers reload after tasks are complete.
-    gulp.watch("src/js/*.js", ['js-watch']);
+    gulp.watch("src/js/**/*.js", ['js-watch']);
 });
 
 
