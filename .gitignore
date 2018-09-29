@@ -1,20 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @vipulism Sign out
-1
-0 0 vipulism/gulphtml
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
-gulphtml/.gitignore
-e416a5c  2 minutes ago
-@vipulism vipulism Initial commit
-     
-62 lines (44 sloc)  914 Bytes
 # Logs
 logs
 *.log
@@ -76,16 +59,3 @@ typings/
 
 # next.js build output
 .next
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Press h to open a hovercard with more details.
